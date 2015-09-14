@@ -58,7 +58,7 @@ void readBookFile() {
     printf("Loaded %d book moves\n", book_move_count);
 }
 
-void book_addline( int line_no, char * movestring ) {
+void book_addline( int line_no, const char * movestring ) {
     char local_string[5];
 
     board_loadFromFen( STARTFEN );

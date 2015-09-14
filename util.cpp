@@ -1,4 +1,3 @@
-
 #include "stdafx.h"
 #include "0x88_math.h"
 #include "transposition.h"
@@ -78,6 +77,7 @@ U64 perft(U8 depth) {
 }
 
 void util_bench(char * command) {
+    Stime chronos;
 	int converted;
     unsigned int starttime = gettime();
 
@@ -234,7 +234,7 @@ void convert_0x88_a(S8 sq, char * a) {
     a[2] = 0;
 }
 
-U8 convert_a_0x88(char * a) {
+U8 convert_a_0x88(const char * a) {
     S8 sq;
     sq = a[0] - 'a';
     sq += (a[1] - '1') * 16;

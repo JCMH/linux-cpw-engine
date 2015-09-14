@@ -2,7 +2,6 @@
 #include "search.h"
 #include "transposition.h"
 
-
 /* symbols used to enhance readability */
 #define DO_NULL    1
 #define NO_NULL    0
@@ -32,7 +31,7 @@ smove move_to_make;	 // move to be returned when search runs out of time
 ******************************************************************************/
 
 void search_run() {
-
+    Stime chronos;
 	if (chronos.flags & (FTIME | FINC | FMOVESTOGO)) {
 		if (getBookMove(BOOK_BROAD)) return;
 	}

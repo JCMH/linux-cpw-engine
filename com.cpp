@@ -1,8 +1,7 @@
-
 #include "stdafx.h"
 #include "transposition.h"
 
-#include <windows.h>
+
 
 enum eproto {
     PROTO_NOTHING,
@@ -13,21 +12,13 @@ enum eproto {
 int debug = 0;
 
 int pipe;
-HANDLE hstdin;
 
 int com_init() {
-
+    Stime chronos;
     unsigned long dw;
-    hstdin = GetStdHandle(STD_INPUT_HANDLE);
-    pipe = !GetConsoleMode(hstdin, &dw);
 
-    if (!pipe) {
-        SetConsoleMode(hstdin,dw&~(ENABLE_MOUSE_INPUT|ENABLE_WINDOW_INPUT));
-        FlushConsoleInputBuffer(hstdin);
-    } else {
-        setvbuf(stdin,NULL,_IONBF,0);
-        setvbuf(stdout,NULL,_IONBF,0);
-    }
+    setvbuf(stdin,NULL,_IONBF,0);
+    setvbuf(stdout,NULL,_IONBF,0);
 
     /* default search settings */
     chronos.movetime = 5000;
@@ -44,15 +35,7 @@ int input() {
 
     if (task == TASK_NOTHING) return 1;
 
-    if (stdin->_cnt > 0) return 1;
-
-    if (pipe) {
-        if (!PeekNamedPipe(hstdin, 0, 0, 0, &dw, 0)) return 1;
-        return dw;
-    } else {
-        GetNumberOfConsoleInputEvents(hstdin, &dw);
-        if (dw > 1) task = TASK_NOTHING;
-    }
+    //if (stdin->_cnt > 0) return 1;
 
     return 0;
 }
@@ -102,6 +85,7 @@ int com() {
 }
 
 int com_nothing(char * command) {
+    Stime chronos;
 	int converted;
     if (!strcmp(command, "xboard"))			    com_xboard(command);
     else if (!strcmp(command, "uci"))		com_uci(command);
@@ -140,6 +124,7 @@ int com_nothing(char * command) {
 }
 
 int com_xboard(char * command) {
+    Stime chronos;
 	int converted;
     if (!strcmp(command, "xboard"))
         mode = PROTO_XBOARD;
@@ -282,7 +267,7 @@ int com_uci(char * command) {
 }
 
 
-int com_send(char * command) {
+int com_send(const char * command) {
     printf("%s\n",command);
     return 0;
 }

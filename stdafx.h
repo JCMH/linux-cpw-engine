@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include <iostream>
@@ -7,20 +6,20 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <stdint.h>
 
 #define INF 10000
 #define INVALID 32767
 #define MAX_DEPTH 100
 
-
-#define U64 unsigned __int64
-#define U32 unsigned __int32
-#define U16 unsigned __int16
-#define U8  unsigned __int8
-#define S64 signed   __int64
-#define S32 signed   __int32
-#define S16 signed   __int16
-#define S8  signed   __int8
+#define U64 uint64_t
+#define U32 uint32_t
+#define U16 uint16_t
+#define U8  uint8_t
+#define S64 int64_t
+#define S32 int32_t
+#define S16 int16_t
+#define S8  int8_t
 
 
 /* Move ordering constants */
@@ -152,7 +151,7 @@ enum etask {
 	TASK_PONDER
 } extern task;
 
-struct stime {
+struct Stime {
     int time[2];
     int inc[2];
     int movestogo;
@@ -161,7 +160,7 @@ struct stime {
     int mate;
     int movetime;
     U8 flags;
-} extern chronos;
+};
 
 struct s_options {
 	int ponder;
@@ -223,10 +222,10 @@ void board_display();
 void clearBoard();
 void fillSq(U8 color, U8 piece, S8 sq);
 void clearSq(S8 sq);
-int board_loadFromFen(char * fen);
+int board_loadFromFen(const char * fen);
 
 
-int com_send(char * command);
+int com_send(const char * command);
 int com_sendmove(smove m);
 int com_uci(char * command);
 int com_xboard(char * command);
@@ -243,7 +242,7 @@ void movegen_sort(U8 movecount, smove * m, U8 current);
 
 
 void convert_0x88_a(S8 sq, char * a);
-U8 convert_a_0x88(char * a);
+U8 convert_a_0x88(const char * a);
 char * algebraic_writemove(smove m, char * a);
 int algebraic_moves(char * a);
 

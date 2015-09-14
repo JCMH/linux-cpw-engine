@@ -1,8 +1,6 @@
-
-
 #include "stdafx.h"
 
-stime chronos;
+Stime chronos;
 
 extern sSearchDriver sd;
 
